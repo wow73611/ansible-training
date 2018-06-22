@@ -7,7 +7,6 @@
 - ansible >= 2.1
 - pip == 7.1.2
 
-
 ## Install dependencies
 
 - Ubuntu
@@ -23,13 +22,11 @@ $ yum install -y git gcc gcc-c++ kernel-devel make openssl-devel libffi-devel ss
 $ yum install -y python-devel python-pip python-virtualenv
 ```
 
-
 ## Upgrade pip
 ```
 $ sudo pip install --upgrade pip==7.1.2
 $ hash -r # Ubuntu14.04 only
 ```
-
 
 ## Install Ansible in virtualenv and active virtualenv
 ```
@@ -38,6 +35,49 @@ $ virtualenv venv
 $ source venv/bin/activate
 $ pip install ansible==2.1
 ```
+
+
+# Ansible Usage
+
+## Use `ansible-galaxy install` before running `ansible-playbook` command
+```
+$ ansible-galaxy install -r requirements.yml -p ./roles -vvv
+```
+
+
+## Run ansible playbook
+The `ansible-playbook` command options:
+```
+  -e EXTRA_VARS, --extra-vars=EXTRA_VARS
+                        set additional variables as key=value or YAML/JSON
+  -i INVENTORY, --inventory-file=INVENTORY
+                        specify inventory host path
+                        (default=/etc/ansible/hosts) or comma separated host
+                        list.
+  -t TAGS, --tags=TAGS  only run plays and tasks tagged with these values
+  -v, --verbose         verbose mode (-vvv for more, -vvvv to enable
+                        connection debugging)
+  --list-hosts          outputs a list of matching hosts; does not execute
+                        anything else
+  --list-tags           list all available tags
+  --list-tasks          list all tasks that would be executed
+```
+
+Running a playbook with `ansible-playbook` command like the following:
+```
+$ ansible-playbook -i inventory_hosts -e "version=1.2.3 other_variable=foo" -e @vars.yml playbook.yml -vvv
+```
+
+## Specified tags
+
+- Display all tags:
+  $ ansible-playbook -i inventory_hosts playbook.yml --list-tags
+
+- Specify the tag:
+  $ ansible-playbook -i inventory_hosts playbook.yml --tags "ntp"
+
+- Skip the tag:
+  $ ansible-playbook -i inventory_hosts playbook.yml --skip-tags "keepalived,haproxy"
 
 
 # Reference & Appendices
