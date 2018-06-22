@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: "Common"
+  description: "Common role example"
+  license: Apache
+  min_ansible_version: 1.8
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial 
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+dependencies: []

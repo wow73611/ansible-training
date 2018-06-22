@@ -1,0 +1,5 @@
+---
+
+- name: print built-in variable
+  debug:
+    msg: "inventory_hostname = {{ inventory_hostname }}"
