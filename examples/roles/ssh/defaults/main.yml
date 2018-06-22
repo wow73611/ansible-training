@@ -1,0 +1,12 @@
+---
+
+sshd_service: sshd
+sshd_packages: []
+
+ssh_password_authentication: 'yes'
+ssh_permit_root_login: 'yes'
+ssh_config:
+  - regexp: "^PasswordAuthentication"
+    line: "PasswordAuthentication {{ ssh_password_authentication }}"
+  - regexp: "^PermitRootLogin"
+    line: "PermitRootLogin {{ ssh_permit_root_login }}"

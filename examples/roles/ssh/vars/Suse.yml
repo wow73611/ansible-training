@@ -1,0 +1,5 @@
+---
+
+#sshd_service: sshd
+sshd_packages:
+  - openssh

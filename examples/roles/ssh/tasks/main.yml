@@ -1,0 +1,32 @@
+---
+
+- name: Load variables file by OS distribution
+  include_vars: "{{ item }}"
+  with_first_found:
+   - "{{ ansible_distribution }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_distribution }}.yml"
+   - "{{ ansible_os_family }}_{{ ansible_distribution_major_version }}.yml"
+   - "{{ ansible_os_family }}.yml"
+   - default.yml
+
+- name: Install ssh packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ sshd_packages }}"
+
+- name: Change SSH daemon config file
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: "{{ item.regexp }}"
+    line: "{{ item.line }}"
+    validate: '/usr/sbin/sshd -T -f %s'
+    backup: yes
+    state: present
+  with_items: '{{ ssh_config }}'
+
+- name: Enable and restart sshd service
+  service:
+    name: sshd
+    state: restarted
+    enabled: yes

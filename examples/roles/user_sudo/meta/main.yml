@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: "Robin Lin"
+  description: Create specific users and sudoers.
+  license: Apache
+  min_ansible_version: 2.1
+  platforms:
+  - name: Ubuntu
+    versions:
+    - trusty
+    - xenial 
+  - name: Debian
+    versions:
+    - wheezy
+    - jessie
+  - name: EL
+    versions:
+    - 6
+    - 7
+  categories:
+  - system
+dependencies: []

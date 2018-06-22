@@ -1,0 +1,39 @@
+---
+
+- name: Output users variable
+  debug:
+    var: users
+
+- name: Creating groups per user
+  group:
+    name: "{{ item.name }}"
+    state: present
+    system: no
+  with_flattened:
+    - '{{ users }}'
+
+- name: Creating users
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid | default(omit) }}"
+    group: "{{ item.group | default(item.name) }}"
+    password: "{{ item.password | default(omit) }}"
+    update_password: "{{ item.update_password | default('on_create') }}"
+    createhome: "{{ item.createhome | default('yes') }}"
+    home: "{{ item.home | default('/home/'+item.name) }}"
+    shell: "{{ item.shell | default('/bin/bash') }}"
+    system: no
+    state: present    
+  with_items: '{{ users }}'
+
+- name: Add sudo users permissions
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: "^{{ item.name }}"
+    line: "{{ item.name }} ALL=(ALL) NOPASSWD: ALL"
+    validate: 'visudo -cf %s'
+    backup: yes
+    state: present
+  when: item.sudo_no_passwd
+  with_items:
+    - "{{ users }}"

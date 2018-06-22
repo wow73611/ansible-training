@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  vars: []
+
+  pre_tasks: []
+
+  roles:
+    - role: ssh
+
+  tasks: []

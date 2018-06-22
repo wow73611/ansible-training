@@ -1,0 +1,12 @@
+---
+
+users:
+  - name: devuser
+    group: devuser
+    # plain text: devuser
+    password: '$6$ZtZQpKNU$rWRLtFkGWccwO21qm07Fyl4HMitcvPjyg/6jzfbdVMbiiMZ3aYyAFqrJT0radchml.NLtMqnqfyhovMQP1t0U.'
+    update_password: always
+    createhome: yes
+    home: /home/devuser
+    shell: /bin/bash
+    sudo_no_passwd: yes
