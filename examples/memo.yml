@@ -1,0 +1,41 @@
+---
+
+###
+# Ubuntu 16.04 comes by default with Python 3.5, changed the default version back to 2.7
+- hosts: all
+  gather_facts: no
+  pre_tasks:
+    - name: apt-get update
+      raw: test -e /usr/bin/python || sudo apt-get update
+      become: yes
+      ignore_errors: true
+
+    - name: install python2
+      raw: test -e /usr/bin/python || sudo apt-get -y install python-minimal
+      become: yes
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  tasks: []
+
+###
+# Remove requiretty when ansible_ssh_pipelining variable is true
+- hosts: all
+  gather_facts: no
+  become: yes
+  vars:
+    ansible_ssh_pipelining: false
+  tasks:
+    - name: Remove requiretty in sudoers set, which makes pipelining fail
+      lineinfile:
+        regexp: '^\w+\s+requiretty'
+        dest: /etc/sudoers
+        state: absent
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+  vars:
+    ansible_ssh_pipelining: true
+  tasks: []
