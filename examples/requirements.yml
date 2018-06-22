@@ -1,0 +1,10 @@
+#ansible-galaxy install -r requirements.yml -p ./roles -vvv
+
+- src : http://your_git_server/boo/ansible-role-boo.git
+  name: boo
+  scm: git
+
+- src : http://your_git_server/foo/ansible-role-foo.git
+  name: foo
+  scm: git
+  version: develop_branch
