@@ -1,0 +1,16 @@
+---
+
+- hosts: all
+  gather_facts: yes
+  become: yes
+
+  vars: []
+
+  pre_tasks: []
+
+  roles:
+    - { role: dumpall,
+        dumpall_host_destination: /tmp/,
+        tags: ['dumpall'] }
+
+  tasks: []
