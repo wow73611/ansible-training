@@ -42,7 +42,7 @@ $ pip install ansible==2.1
 
 # Reference & Appendices
 
-[Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-[User Guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
-[Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
-[Module Index](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
+- [Installation Guide](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
+- [User Guide](https://docs.ansible.com/ansible/latest/user_guide/index.html)
+- [Best Practices](https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html)
+- [Module Index](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
